@@ -47,7 +47,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            App1Theme {
+            App1Theme  {
                 MyApp(modifier = Modifier.fillMaxSize())
             }
         }
@@ -79,12 +79,12 @@ fun OnboardingScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("Welcome to the Basics Codelab!")
+        Text("Bienvenido al codelab basico!")
         Button(
             modifier = Modifier.padding(vertical = 24.dp),
             onClick = onContinueClicked
         ) {
-            Text("Continue")
+            Text("Entrar")
         }
     }
 }
@@ -105,7 +105,7 @@ private fun Greetings(
 private fun Greeting(name: String) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.primary
+            containerColor = MaterialTheme.colorScheme.onPrimary
         ),
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
@@ -123,7 +123,7 @@ private fun CardContent(name: String) {
             .animateContentSize(
                 animationSpec = spring(
                     dampingRatio = Spring.DampingRatioMediumBouncy,
-                    stiffness = Spring.StiffnessLow
+                    stiffness = Spring.StiffnessVeryLow
                 )
             )
     ) {
@@ -132,7 +132,7 @@ private fun CardContent(name: String) {
                 .weight(1f)
                 .padding(12.dp)
         ) {
-            Text(text = "Hello, ")
+            Text(text = "Hola, ")
             Text(
                 text = name, style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.ExtraBold
@@ -140,8 +140,11 @@ private fun CardContent(name: String) {
             )
             if (expanded) {
                 Text(
-                    text = ("Composem ipsum color sit lazy, " +
-                            "padding theme elit, sed do bouncy. ").repeat(4),
+                    text = ("Aplicación de prueba, " +
+                            "Despliegue de información.")
+
+//                    Anteriormente se aplico un .repeat(4) pero solamente quiero que se ejecute una vez
+
                 )
             }
         }

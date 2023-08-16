@@ -37,7 +37,7 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    surface = Blue,
+    surface = azuloscurito,
     onSurface = Color.White,
     primary = LightBlue,
     onPrimary = Navy
@@ -69,6 +69,7 @@ fun App1Theme(
     }
 
     MaterialTheme(
+
         colorScheme = colorScheme,
         typography = Typography,
         content = content
