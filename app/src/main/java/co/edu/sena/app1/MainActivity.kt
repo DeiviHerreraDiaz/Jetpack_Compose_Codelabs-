@@ -55,31 +55,49 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun ListComposable(myList: List<String>) {
-    Column {
-        for (item in myList) {
-            Text("Item: $item")
+fun MyApp(modifier: Modifier = Modifier) {
+
+    var shouldShowOnboarding by rememberSaveable { mutableStateOf(true) }
+
+    Surface(modifier) {
+        if (shouldShowOnboarding) {
+            OnboardingScreen(onContinueClicked = { shouldShowOnboarding = false })
+        } else {
+            Greetings()
         }
-        Text("Count: ${myList.size}")
     }
 }
 
 @Composable
-fun ClickCounter(clicks: Int, onClick: () -> Unit) {
-    Button(onClick = onClick) {
-        Text("I've been clicked $clicks times")
-    }
-}
-
-@Composable
-fun SharedPrefsToggle(
-    text: String,
-    value: Boolean,
-    onValueChanged: (Boolean) -> Unit
+fun OnboardingScreen(
+    onContinueClicked: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Column {
-        Text(text)
-        Checkbox(checked = value, onCheckedChange = onValueChanged)
+
+    Column(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text("Welcome to the Basics Codelab!")
+        Button(
+            modifier = Modifier.padding(vertical = 24.dp),
+            onClick = onContinueClicked
+        ) {
+            Text("Continue")
+        }
+    }
+}
+
+@Composable
+private fun Greetings(
+    modifier: Modifier = Modifier,
+    names: List<String> = List(1000) { "$it" }
+) {
+    LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
+        items(items = names) { name ->
+            Greeting(name = name)
+        }
     }
 }
 
@@ -141,54 +159,7 @@ private fun CardContent(name: String) {
     }
 }
 
-@Composable
-fun MyApp(modifier: Modifier = Modifier) {
-
-    var shouldShowOnboarding by rememberSaveable { mutableStateOf(true) }
-
-    Surface(modifier) {
-        if (shouldShowOnboarding) {
-            OnboardingScreen(onContinueClicked = { shouldShowOnboarding = false })
-        } else {
-            Greetings()
-        }
-    }
-}
-
-@Composable
-private fun Greetings(
-    modifier: Modifier = Modifier,
-    names: List<String> = List(1000) { "$it" }
-) {
-    LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
-        items(items = names) { name ->
-            Greeting(name = name)
-        }
-    }
-}
-
-
-
-@Composable
-fun OnboardingScreen(
-    onContinueClicked: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-
-    Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("Welcome to the Basics Codelab!")
-        Button(
-            modifier = Modifier.padding(vertical = 24.dp),
-            onClick = onContinueClicked
-        ) {
-            Text("Continue")
-        }
-    }
-}
+//PREVIEWS
 
 @Preview(showBackground = true, widthDp = 320)
 @Composable
